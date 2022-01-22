@@ -1,3 +1,3 @@
 # ulcer_classification-Title
 
-<img src="imgs/overview.jpeg" width="800px"/>
+<img src="imgs/overview.png" width="800px"/>
