@@ -8,8 +8,8 @@ In this work, we proposed .....
 
 ## Example Results
 
-### Frozen to FFPE Translation in Brain Specimens
-<img src="imgs/brain_gif.gif" width="800px"/>
+### Grad-CAM++ with Real Images
+<img src="imgs/GradCamFigure.png" width="1200px"/>
 
 ### Frozen to FFPE Translation in Lung Specimens
 <img src="imgs/lung_gif.gif" width="800px"/>
