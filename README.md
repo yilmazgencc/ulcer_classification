@@ -11,8 +11,8 @@ In this work, we proposed .....
 ### Grad-CAM++ with Real Images
 <img src="imgs/GradCamFigure.png" width="1200px"/>
 
-### Frozen to FFPE Translation in Lung Specimens
-<img src="imgs/lung_gif.gif" width="800px"/>
+### Real and Synthetic Images
+<img src="imgs/GradeDataVis (2).png" width="1200px"/>
 
 
 ## Prerequisites
@@ -25,11 +25,11 @@ In this work, we proposed .....
 
 - Clone this repo:
 ```bash
-git clone https://github.com/DeepMIALab/AI-FFPE
-cd AI-FFPE
+git clone https://github.com/DeepMIALab/Ulcer_grade_classificaiton
+cd Ulcer_grade_classificaiton
 ```
 
-- Install PyTorch 1.1 and other dependencies (e.g., torchvision, visdom, dominate, gputil).
+- Install PyTorch 3.7 and other dependencies (e.g., torchvision, visdom, dominate, gputil).
 
 - For pip users, please type the command `pip install -r requirements.txt`.
 
@@ -37,28 +37,45 @@ cd AI-FFPE
 
 ### Training and Test
 
-- The slide identity numbers which were used in train, validation and test sets are given as .txt files in [docs/](https://github.com/DeepMIALab/AI-FFPE/tree/main/docs) for both Brain and Lung dataset. To replicate the results, you may download [GBM](https://portal.gdc.cancer.gov/projects/TCGA-GBM) and [LGG](https://portal.gdc.cancer.gov/projects/TCGA-LGG) projects for Brain, [LUAD](https://portal.gdc.cancer.gov/projects/TCGA-LUAD) and [LUSC](https://portal.gdc.cancer.gov/projects/TCGA-LUSC) projects for Lung from TCGA Data Portal and create a subset using these .txt files.
-- To extract the patches from WSIs and create PNG files, please follow the instructions given in [AI-FFPE/Data_preprocess](https://github.com/DeepMIALab/AI-FFPE/tree/main/Data_preprocess) section. 
+- The image identity numbers which were used in train, validation and test sets are given as .txt files in [docs/](https://github.com/DeepMIALab/AI-FFPE/tree/main/docs) for both Brain and Lung dataset. To replicate the results, you may download [dataset]() projects for Lung from TCGA Data Portal and create a subset using these .txt files.
 
 The data used for training are expected to be organized as follows:
 ```bash
 Data_Path                # DIR_TO_TRAIN_DATASET
- ├──  trainA
- |      ├── 1.png     
- |      ├── ...
- |      └── n.png
- ├──  trainB     
- |      ├── 1.png     
- |      ├── ...
- |      └── m.png
- ├──  valA
- |      ├── 1.png     
- |      ├── ...
- |      └── j.png
- └──  valB     
-        ├── 1.png     
-        ├── ...
-        └── k.png
+ ├──  train
+ |      ├──Grade_0
+ |           ├── 1.png     
+ |           ├── ...
+ |           └── n.png
+ |      ├──Grade_1
+ |           ├── 1.png     
+ |           ├── ...
+ |           └── n.png
+ |      ├──Grade_2
+ |           ├── 1.png     
+ |           ├── ...
+ |           └── n.png
+ |      ├──Grade_3
+ |           ├── 1.png     
+ |           ├── ...
+ |           └── n.png
+ ├──  test
+ |      ├──Grade_0
+ |           ├── 1.png     
+ |           ├── ...
+ |           └── n.png
+ |      ├──Grade_1
+ |           ├── 1.png     
+ |           ├── ...
+ |           └── n.png
+ |      ├──Grade_2
+ |           ├── 1.png     
+ |           ├── ...
+ |           └── n.png
+ |      ├──Grade_3
+ |           ├── 1.png     
+ |           ├── ...
+ |           └── n.png
 
 ```
 
