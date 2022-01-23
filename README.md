@@ -8,7 +8,7 @@ In this work, we propose an AI-assisted and easily interpretable ulcerative coll
 
 ## Example Results
 
-### Grad-CAM++ with Real Images
+### Real Images and Grad-CAM++ Result
 <img src="imgs/GradCamFigure.png" width="1200px"/>
 
 ### Real and Synthetic Images
