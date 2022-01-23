@@ -105,7 +105,7 @@ python classifer.py --action train --train_data ./dataset/train --test_data ./da
 
 - Test the UC model:
 ```bash
-python classifer.py --action test --test_data ./dataset/test --model_name $MODEL --epoch_number $EPOCH_NUMBER --bs $BATCH_SIZE --lr $LEARNING_RATE
+python classifer.py --action test --test_data ./dataset/test --load_from TRAINED_WEIGHT_PATH --model_name $MODEL --epoch_number $EPOCH_NUMBER --bs $BATCH_SIZE --lr $LEARNING_RATE
 ```
 
 The list of other arguments is as follows:
