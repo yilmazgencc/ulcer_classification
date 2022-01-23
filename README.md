@@ -14,6 +14,22 @@ In this work, we proposed .....
 ### Real and Synthetic Images
 <img src="imgs/GradeDataVis (2).png" width="1200px"/>
 
+## Dataset
+
+The dataset used in this study is derived from the original [Hyper-Kvasir](https://datasets.simula.no/hyper-kvasir/) open-source dataset. Ulcerative Collitis(UC) images were classified according to the Mayo scoring method, which consists of score 0 representing no disease, score 1 representing mild disease, score 2 representing moderate disease, and score 3 representing severe disease.
+
+We introduce new labelled 679 UC endoscopy images from [Hyper-Kvasir](https://datasets.simula.no/hyper-kvasir/) dataset including 128 for grade 0, 211 for grade 1, 217 for grade 2, and 123 for grade 3 were labelled by our experienced gastroenterologists.
+
+The dataset used in this study includes a total of 509 UC endoscopy-labelled images with grade 0, grade 1, grade 2, and grade 3 from original [Hyper-Kvasir](https://datasets.simula.no/hyper-kvasir/) .
+
+Our study contains a total of 1188 images from the UC endoscopy images;
+- 150 grade 0 
+- 351 grade 1 
+- 456 grade 2 
+- 219 grade 3
+
+
+
 
 ## Prerequisites
 - Linux or macOS
@@ -37,11 +53,11 @@ cd Ulcer_grade_classificaiton
 
 ### Training and Test
 
-- The image identity numbers which were used in train, validation and test sets are given as .txt files in [docs/](https://github.com/DeepMIALab/AI-FFPE/tree/main/docs) for both Brain and Lung dataset. To replicate the results, you may download [dataset]() projects for Lung from TCGA Data Portal and create a subset using these .txt files.
+- The image identity numbers which were used in train, validation and test sets are given as .txt files in [docs/](https://github.com/DeepMIALab/AI-FFPE/tree/main/docs) for both Brain and Lung dataset. To replicate the results, you may download [dataset]() and create a subset using these .txt files.
 
 The data used for training are expected to be organized as follows:
 ```bash
-Data_Path                # DIR_TO_TRAIN_DATASET
+DATASET                
  ├──  train
  |      ├──Grade_0
  |           ├── 1.png     
@@ -81,26 +97,21 @@ Data_Path                # DIR_TO_TRAIN_DATASET
 
 - To view training results and loss plots, run `python -m visdom.server` and click the URL http://localhost:8097.
 
-- Train the AI-FFPE model:
+- Train the UC model:
 ```bash
-python train.py --dataroot ./datasets/Frozen/${dataroot_train_dir_name} --name ${model_results_dir_name} --CUT_mode CUT --batch_size 1
+python classifer.py --action train --train_data ./dataset/train --test_data ./dataset/test --model_name $MODEL --epoch_number $EPOCH_NUMBER
 ```
 
-- Test the AI-FFPE  model:
+- Test the UC model:
 ```bash
-python test.py --dataroot ./datasets/Frozen/${dataroot_test_dir_name}  --name ${result_dir_name} --CUT_mode CUT --phase test --epoch ${epoch_number} --num_test ${number_of_test_images}
+python classifer.py --action test --train_data ./dataset/train --test_data ./dataset/test --model_name $MODEL --epoch_number $EPOCH_NUMBER
 ```
 
 The test results will be saved to a html file here: ``` ./results/${result_dir_name}/latest_train/index.html ``` 
 
 
-
-### AI-FFPE, AI-FFPE without Spatial Attention Block, AI-FFPE without self-regularization loss, CUT, FastCUT, and CycleGAN
-
-<img src="imgs/ablation.png" width="800px"/>
-
-### Apply a pre-trained AI-FFPE model and evaluate
-For reproducability, you can download the pretrained models for each algorithm [here.](https://www.dropbox.com/sh/x7fvxx1fiohxwb4/AAAObJJTJpIHHi-s2UafrKeea?dl=0)
+### Apply a pre-trained UC Grade Classificaiton model and evaluate
+For reproducability, you can download the pretrained models for each algorithm [here.]()
 
 ## Reference
 
@@ -120,4 +131,4 @@ If you find our work useful in your research or if you use parts of this code pl
 
 
 ### Acknowledgments
-Our code is developed based on [CUT](https://github.com/taesungp/contrastive-unpaired-translation). We also thank [pytorch-fid](https://github.com/mseitzer/pytorch-fid) for FID computation, and [stylegan2-pytorch](https://github.com/rosinality/stylegan2-pytorch/) for the PyTorch implementation of StyleGAN2 used in our single-image translation setting.
+Our code is developed based on [pytorch-image-models](https://github.com/rwightman/pytorch-image-models/tree/54a6cca27a9a3e092a07457f5d56709da56e3cf5). We also thank [pytorch-fid](https://github.com/mseitzer/pytorch-fid) for FID computation, and [FastGAN-pytorch](https://github.com/odegeasslbc/FastGAN-pytorch) for the PyTorch implementation of FastGAN used in our single-image translation setting.
