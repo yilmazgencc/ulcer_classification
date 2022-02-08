@@ -1,7 +1,7 @@
 # SCI-AIDE : High-fidelity Few-shot Histopathology Image Synthesis for Rare Cancer Diagnosis
-
-<img src="main_figure.jpeg" width="1200px"/>
-
+<p align="center">
+ <img src="main_figure.jpeg" width="800px"/>
+</p>
 
 ###  [Pretrained Models]() | [Website](https://deepmia.boun.edu.tr/) 
 
@@ -16,7 +16,7 @@ In this work, we created synthetic tissue microscopy images using few-shot learn
 <img src="imgs/GradeDataVis (2).png" width="1200px"/>
 
 ### Synthetic Images Generation Process
-<img src="gif_2_epen_ana.gif" width="1200px"/>
+<img src="gif_3_epen_ana.gif" width="1200px"/>
 
 
 ## Dataset
@@ -38,9 +38,9 @@ WSIs and labelled dataset will be available publicly in soon
 
 
 ## Prerequisites
-- Linux or macOS
-- Python 3
-- CPU or NVIDIA GPU + CUDA CuDNN
+- Linux (Tested on Red Hat Enterprise Linux 8.5)
+- NVIDIA GPU (Tested on Nvidia GeForce RTX 3090 Ti x 4 on local workstations, and Nvidia A100 GPUs on [TRUBA](https://www.truba.gov.tr/index.php/en/main-page/)
+- Python (3.9.7), matplotlib (3.4.3), numpy (1.21.2), opencv (4.5.3), openslide-python (1.1.1), openslides (3.4.1), pandas (1.3.3), pillow (8.3.2), PyTorch (1.9.0), scikit-learn (1.0), scipy (1.7.1),  tensorboardx (2.4), torchvision (0.10.1).
 
 
 ### Getting started
