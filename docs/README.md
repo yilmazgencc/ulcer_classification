@@ -1,4 +1,4 @@
-# ulcer_classification-Title
+# SCI-AIDE : High-fidelity Few-shot Histopathology Image Synthesis for Rare Cancer Diagnosis
 
 <img src="imgs/overview.png" width="1200px"/>
 
