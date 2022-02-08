@@ -9,8 +9,7 @@ In this work, we created synthetic tissue microscopy images using few-shot learn
 
 ## Example Results
 
-### Real WSIs and Grad-CAM++ Result
-<img src="imgs/GradCamFigure.png" width="1200px"/>
+
 
 ### Real and Synthetic Images
 <img src="imgs/GradeDataVis (2).png" width="1200px"/>
@@ -18,8 +17,20 @@ In this work, we created synthetic tissue microscopy images using few-shot learn
 ### Synthetic Images Generation Process
 <img src="gif_3_epen_ana.gif" width="1200px"/>
 
+### Real WSIs and Grad-CAM++ Result
+<img src="imgs/GradCamFigure.png" width="1200px"/>
 
 ## Dataset
+
+In this study, we conducted experiments using histopathological whole slide images(WSIs) of five rare childhood cancer types and their sub-types, namely ependymoma (anaplastic, myxopapillary, subependymoma and no-subtype), medulloblastoma (anaplastic, desmoplastic and no-subtype), Wilms tumour, also known as nephroblastoma (epithelial, blastomatous, stromal, Wilms epithelial-stromal, epithelial-blastomatous and blastomatous-stromal), pilocytic astrocytoma and Ewing sarcoma.
+
+Tumour histopathology WSIs are collected at [Ege University](https://med.ege.edu.tr/eng-2025/education.html), Turkey and Aperio AT2 scanner digitised the WSIs at 20× magnification.
+
+
+Our study contains a total of 673 images from the UC endoscopy images
+
+
+
 
 The dataset used in this study is derived from the original [Hyper-Kvasir](https://datasets.simula.no/hyper-kvasir/) open-source dataset. UC images were classified according to the Mayo scoring method, which consists of score 0 representing no disease, score 1 representing mild disease, score 2 representing moderate disease, and score 3 representing severe disease.
 
