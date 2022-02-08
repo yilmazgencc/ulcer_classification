@@ -14,8 +14,6 @@ In this work, we created synthetic tissue microscopy images using few-shot learn
 ### Real and Synthetic Images
 <img src="imgs/GradeDataVis (2).png" width="1200px"/>
 
-### Synthetic Images Generation Process
-<img src="gif_3_epen_ana.gif" width="1200px"/>
 
 ### Real WSIs and Grad-CAM++ Result
 <img src="imgs/GradCamFigure.png" width="1200px"/>
@@ -24,29 +22,7 @@ In this work, we created synthetic tissue microscopy images using few-shot learn
 
 In this study, we conducted experiments using histopathological whole slide images(WSIs) of five rare childhood cancer types and their sub-types, namely ependymoma (anaplastic, myxopapillary, subependymoma and no-subtype), medulloblastoma (anaplastic, desmoplastic and no-subtype), Wilms tumour, also known as nephroblastoma (epithelial, blastomatous, stromal, Wilms epithelial-stromal, epithelial-blastomatous and blastomatous-stromal), pilocytic astrocytoma and Ewing sarcoma.
 
-Tumour histopathology WSIs are collected at [Ege University](https://med.ege.edu.tr/eng-2025/education.html), Turkey and Aperio AT2 scanner digitised the WSIs at 20× magnification.
-
-
-Our study contains a total of 673 images from the UC endoscopy images
-
-
-
-
-The dataset used in this study is derived from the original [Hyper-Kvasir](https://datasets.simula.no/hyper-kvasir/) open-source dataset. UC images were classified according to the Mayo scoring method, which consists of score 0 representing no disease, score 1 representing mild disease, score 2 representing moderate disease, and score 3 representing severe disease.
-
-We introduce new labelled 352 UC endoscopy images from [Hyper-Kvasir](https://datasets.simula.no/hyper-kvasir/) dataset including 98 for grade 0, 93 for grade 1, 91 for grade 2, and 70 for grade 3 were labelled by our experienced gastroenterologists.
-
-The dataset used in this study includes a total of 321 UC endoscopy-labelled images with grade 0, grade 1, grade 2, and grade 3 from original [Hyper-Kvasir](https://datasets.simula.no/hyper-kvasir/) .
-
-Our study contains a total of 673 images from the UC endoscopy images;
-- 120 grade 0 
-- 212 grade 1 
-- 218 grade 2 
-- 123 grade 3
-
-WSIs and labelled dataset will be available publicly in soon
-
-
+Tumour histopathology WSIs are collected at [Ege University](https://med.ege.edu.tr/eng-2025/education.html), Turkey and Aperio AT2 scanner digitised the WSIs at 20× magnification. WSIs will be available publicly soon
 
 ## Prerequisites
 - Linux (Tested on Red Hat Enterprise Linux 8.5)
@@ -54,20 +30,41 @@ WSIs and labelled dataset will be available publicly in soon
 - Python (3.9.7), matplotlib (3.4.3), numpy (1.21.2), opencv (4.5.3), openslide-python (1.1.1), openslides (3.4.1), pandas (1.3.3), pillow (8.3.2), PyTorch (1.9.0), scikit-learn (1.0), scipy (1.7.1),  tensorboardx (2.4), torchvision (0.10.1).
 
 
+### Synthetic Generation
+
+
+
 ### Getting started
 
 - Clone this repo:
 ```bash
-git clone https://github.com/DeepMIALab/Ulcer_grade_classificaiton
-cd Ulcer_grade_classificaiton
+git clone https://github.com/ekurtulus/SCI-AIDE.git
+cd SCI-AIDE
 ```
 
-- Install PyTorch 3.7 and other dependencies (e.g., torchvision, visdom, dominate, gputil).
+- Install PyTorch 3.9 and other dependencies (e.g., PyTorch).
 
 - For pip users, please type the command `pip install -r requirements.txt`.
 
 - For Conda users,  you can create a new Conda environment using `conda env create -f environment.yml`.
 
+### Synthetic Images Generation
+
+<img src="gif_3_epen_ana.gif" width="1200px"/>
+
+- Clone FastGAN repo:
+```bash
+git clone https://github.com/odegeasslbc/FastGAN-pytorch.git
+cd FastGAN-pytorch
+```
+- Train the FastGAN model:
+```bash
+python classifer.py --path $REAL_IMAGE_DIR --iter 100000 --batch_size 16
+```
+- Inference the FastGAN model:
+```bash
+python eval.py --ckpt $CKPT_PATH --n_sample $NUMBERS_OF_SAMPLE
+```
 ### Training and Test
 
 - The image identity numbers which were used in train, validation and test sets are given as .txt files in [docs/](https://github.com/DeepMIALab/AI-FFPE/tree/main/docs) for both Brain and Lung dataset. To replicate the results, you may download [dataset]() and create a subset using these .txt files.
@@ -76,7 +73,7 @@ The data used for training are expected to be organized as follows:
 ```bash
 DATASET                
  ├──  train
- |      ├──Grade_0
+ |      ├──
  |           ├── 1.png     
  |           ├── ...
  |           └── n.png
@@ -114,12 +111,12 @@ DATASET
 
 
 
-- Train the UC model:
+- Train the SCI-AIDE model:
 ```bash
-python classifer.py --action train --train_data ./dataset/train --test_data ./dataset/test --model_name $MODEL --epoch_number $EPOCH_NUMBER --bs $BATCH_SIZE --lr $LEARNING_RATE
+python train.py --action train --train_data ./dataset/train --test_data ./dataset/test --model_name $MODEL --epoch_number $EPOCH_NUMBER --bs $BATCH_SIZE --lr $LEARNING_RATE
 ```
 
-- Test the UC model:
+- Test the SCI-AIDE model:
 ```bash
 python classifer.py --action test --test_data ./dataset/test --load_from TRAINED_WEIGHT_PATH --model_name $MODEL --epoch_number $EPOCH_NUMBER --bs $BATCH_SIZE --lr $LEARNING_RATE
 ```
@@ -132,12 +129,7 @@ The list of other arguments is as follows:
 -  --augmentation_size:
 
 
-- To view training results and loss plots, run `python -m visdom.server` and click the URL http://localhost:8097.
-
-The test results will be saved to a html file here: ``` ./results/${result_dir_name}/latest_train/index.html ``` 
-
-
-### Apply a pre-trained UC Grade Classificaiton model and evaluate
+### Apply a pre-trained SCI-AIDE model and evaluate
 For reproducability, you can download the pretrained models for each algorithm [here.]()
 
 ## Issues
@@ -158,14 +150,7 @@ This work was funded by [TUBITAK](https://www.tubitak.gov.tr/) for International
 If you find our work useful in your research or if you use parts of this code please consider citing our paper:
 
 ```
-@misc{ozyoruk2021deep,
-      title={Deep Learning-based Frozen Section to FFPE Translation}, 
-      author={Kutsev Bengisu Ozyoruk and Sermet Can and Guliz Irem Gokceler and Kayhan Basak and Derya Demir and Gurdeniz Serin and Uguray Payam Hacisalihoglu and Berkan Darbaz and Ming Y. Lu and Tiffany Y. Chen and Drew F. K. Williamson and Funda Yilmaz and Faisal Mahmood and Mehmet Turan},
-      year={2021},
-      eprint={2107.11786},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV}
-}
+
 ```
 
 
