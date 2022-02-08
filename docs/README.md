@@ -1,18 +1,23 @@
 # SCI-AIDE : High-fidelity Few-shot Histopathology Image Synthesis for Rare Cancer Diagnosis
 
-<img src="imgs/overview.png" width="1200px"/>
+<img src="main_figure.jpeg" width="1200px"/>
 
-### [Paper]() |  [Dataset]() | [Pretrained Models]() | [Website](https://deepmia.boun.edu.tr/) 
 
-In this work, we propose an AI-assisted and easily interpretable ulcerative collitis (UC) classification system supported by an additional synthetic data generation approach that confidentially and accurately classifies endoscopic images from UC. Additionaly, we introduce new 352 UC endoscopy images were labelled by our experienced gastroenterologists.
+###  [Pretrained Models]() | [Website](https://deepmia.boun.edu.tr/) 
+
+In this work, we created synthetic tissue microscopy images using few-shot learning and developed a digital pathology pipeline called SCI-AIDE to improve diagnostic accuracy. Since rare cancers encompass a very large group of tumours, we used childhood cancer histopathology images to develop and test our system. Our computational experiments demonstrate that the synthetic images significantly enhances performance of various AI classifiers. 
 
 ## Example Results
 
-### Real Images and Grad-CAM++ Result
+### Real WSIs and Grad-CAM++ Result
 <img src="imgs/GradCamFigure.png" width="1200px"/>
 
 ### Real and Synthetic Images
 <img src="imgs/GradeDataVis (2).png" width="1200px"/>
+
+### Synthetic Images Generation Process
+<img src="gif_2_epen_ana.gif" width="1200px"/>
+
 
 ## Dataset
 
@@ -28,7 +33,7 @@ Our study contains a total of 673 images from the UC endoscopy images;
 - 218 grade 2 
 - 123 grade 3
 
-UC labelled dataset is publicly available in [Mendeley](https:)
+WSIs and labelled dataset will be available publicly in soon
 
 
 
