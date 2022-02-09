@@ -1,6 +1,6 @@
 # SCI-AIDE : High-fidelity Few-shot Histopathology Image Synthesis for Rare Cancer Diagnosis
 <p align="center">
- <img src="main_figure.jpeg" width="800px"/>
+ <img src="imgs/main_figure.jpeg" width="800px"/>
 </p>
 
 ###  [Pretrained Models]() | [Website](https://deepmia.boun.edu.tr/) 
@@ -12,10 +12,10 @@ In this work, we created synthetic tissue microscopy images using few-shot learn
 
 
 ### Real and Synthetic Images
-<img src="imgs/GradeDataVis (2).png" width="1200px"/>
+<img src="imgs/synthetic_main_figure.jpg" width="800px"/>
 
 
-### Real WSIs and Grad-CAM++ Result
+### Real WSIs and CAM Result
 <img src="imgs/GradCamFigure.png" width="1200px"/>
 
 ## Dataset
@@ -45,7 +45,7 @@ cd SCI-AIDE
 
 ### Synthetic Images Generation
 
-<img src="gif_3_epen_ana.gif" width="1200px"/>
+<img src="imgs/gif_1.gif" width="1200px"/>
 
 - Clone FastGAN repo:
 ```bash
@@ -60,51 +60,6 @@ python classifer.py --path $REAL_IMAGE_DIR --iter 100000 --batch_size 16
 ```bash
 python eval.py --ckpt $CKPT_PATH --n_sample $NUMBERS_OF_SAMPLE
 ```
-### Training and Test
-
-- The image identity numbers which were used in train, validation and test sets are given as .txt files in [docs/](https://github.com/DeepMIALab/AI-FFPE/tree/main/docs) for both Brain and Lung dataset. To replicate the results, you may download [dataset]() and create a subset using these .txt files.
-
-The data used for training are expected to be organized as follows:
-```bash
-DATASET                
- ├──  train
- |      ├──
- |           ├── 1.png     
- |           ├── ...
- |           └── n.png
- |      ├──Grade_1
- |           ├── 1.png     
- |           ├── ...
- |           └── n.png
- |      ├──Grade_2
- |           ├── 1.png     
- |           ├── ...
- |           └── n.png
- |      ├──Grade_3
- |           ├── 1.png     
- |           ├── ...
- |           └── n.png
- ├──  test
- |      ├──Grade_0
- |           ├── 1.png     
- |           ├── ...
- |           └── n.png
- |      ├──Grade_1
- |           ├── 1.png     
- |           ├── ...
- |           └── n.png
- |      ├──Grade_2
- |           ├── 1.png     
- |           ├── ...
- |           └── n.png
- |      ├──Grade_3
- |           ├── 1.png     
- |           ├── ...
- |           └── n.png
-
-```
-
-
 
 - Train the SCI-AIDE model:
 ```bash
@@ -125,9 +80,12 @@ The list of other arguments is as follows:
 
 - Evaluation the SCI-AIDE model:
 ```bash
-python wsi_attention.py --datapath $DATAPATH_PATH --model $MODEL --model_weights $
+python wsi_attention.py --datapath $DATAPATH_PATH --model $MODEL --model_weights $MODEL_WEIGHT --output $OUTPUT_PATH --name $NAME --num_classes $NUM_CLASSES
 ```
+The list of other arguments is as follows:
 
+- --attention_level : ("pixel", "patch", default="patch)
+- --cam : CAM selection ( "GradCAM", "ScoreCAM", "GradCAMPlusPlus", "AblationCAM", "XGradCAM", "EigenCAM", "FullGrad", default="EigenCAM" )
 
 - Diagnosis WSI with the SCI-AIDE model:
 ```bash
@@ -139,7 +97,6 @@ The list of other arguments is as follows:
 - --patch_size : WSI oatching size (default : 1024 )
 - --heatmap : Heatmap inference activation
 - --white_threshold : White pathch elimiantion ration (default :0.3)
-- 
 
 ### Apply a pre-trained SCI-AIDE model and evaluate
 For reproducability, you can download the pretrained models for each algorithm [here.]()
@@ -164,8 +121,6 @@ If you find our work useful in your research or if you use parts of this code pl
 ```
 
 ```
-
-
 
 ### Acknowledgments
 Our code is developed based on [pytorch-image-models](https://github.com/rwightman/pytorch-image-models/tree/54a6cca27a9a3e092a07457f5d56709da56e3cf5). We also thank [pytorch-fid](https://github.com/mseitzer/pytorch-fid) for FID computation, and [FastGAN-pytorch](https://github.com/odegeasslbc/FastGAN-pytorch) for the PyTorch implementation of FastGAN used in our single-image translation setting.
