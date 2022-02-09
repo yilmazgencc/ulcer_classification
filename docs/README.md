@@ -29,11 +29,6 @@ Tumour histopathology WSIs are collected at [Ege University](https://med.ege.edu
 - NVIDIA GPU (Tested on Nvidia GeForce RTX 3090 Ti x 4 on local workstations, and Nvidia A100 GPUs on [TRUBA](https://www.truba.gov.tr/index.php/en/main-page/)
 - Python (3.9.7), matplotlib (3.4.3), numpy (1.21.2), opencv (4.5.3), openslide-python (1.1.1), openslides (3.4.1), pandas (1.3.3), pillow (8.3.2), PyTorch (1.9.0), scikit-learn (1.0), scipy (1.7.1),  tensorboardx (2.4), torchvision (0.10.1).
 
-
-### Synthetic Generation
-
-
-
 ### Getting started
 
 - Clone this repo:
@@ -113,21 +108,38 @@ DATASET
 
 - Train the SCI-AIDE model:
 ```bash
-python train.py --action train --train_data ./dataset/train --test_data ./dataset/test --model_name $MODEL --epoch_number $EPOCH_NUMBER --bs $BATCH_SIZE --lr $LEARNING_RATE
-```
-
-- Test the SCI-AIDE model:
-```bash
-python classifer.py --action test --test_data ./dataset/test --load_from TRAINED_WEIGHT_PATH --model_name $MODEL --epoch_number $EPOCH_NUMBER --bs $BATCH_SIZE --lr $LEARNING_RATE
+python train.py --datapath $DATAPATH_PATH --model $MODEL --savepath $SAVING_PATH --task $TRAINING_TASK
 ```
 
 The list of other arguments is as follows:
 
-- --model_name: CNN model name is avaliable in [pytorch-image-models](https://github.com/rwightman/pytorch-image-models/tree/54a6cca27a9a3e092a07457f5d56709da56e3cf5)
--  --scheduler: Learning schedululer selection (CosineAnnealingLR or ReduceLROnPlateau)
--  --optimizer: Optimizers selection ( SGD, Adam or RMSprop )
--  --augmentation_size:
+- --lr : Learning rate (default: 5e-5)
+- --opt : Optimizers ( "Adam", "SGD", "RMSprop", "AdamW" , default= "SGD")
+- --batch-size : Batch size (default: 32)
+- --halftensor : Mixed presicion acivaiton
+- --epochs : Numbers of epochs
+- --scheduler : Learning scheduler ( "cosine", "multiplicative" , default="cosine")
+- --augmentation : Augmentation selection ( "randaugment", "autoaugment", "augmix", "none", default= "randaugment" )
+- --memory : Data reading selection ( "none", "cached", default= "none" )
 
+
+- Evaluation the SCI-AIDE model:
+```bash
+python wsi_attention.py --datapath $DATAPATH_PATH --model $MODEL --model_weights $
+```
+
+
+- Diagnosis WSI with the SCI-AIDE model:
+```bash
+python wsi_diagnosis.py --task $DIAGNOSIS_TASK --datapath $WSI_PATH --output $OUTPUT_PATH --config $CONFIG_FILE_PATH --name $NAME
+```
+The list of other arguments is as follows:
+
+- --overlap : Patches overlaping raito (default :0 )
+- --patch_size : WSI oatching size (default : 1024 )
+- --heatmap : Heatmap inference activation
+- --white_threshold : White pathch elimiantion ration (default :0.3)
+- 
 
 ### Apply a pre-trained SCI-AIDE model and evaluate
 For reproducability, you can download the pretrained models for each algorithm [here.]()
